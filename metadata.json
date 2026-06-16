@@ -1,0 +1,6 @@
+{
+  "name": "RideNity",
+  "description": "A trust-first mobility platform. Optimizes trust, driver earnings, and predictability.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
