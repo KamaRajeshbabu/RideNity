@@ -46,7 +46,7 @@ class TrustLayerViewModel : ViewModel() {
                 val request = GenerateContentRequest(
                     contents = listOf(Content(parts = listOf(Part(text = prompt)))),
                     generationConfig = GenerationConfig(
-                        thinkingConfig = ThinkingConfig(thinkingLevel = "high")
+                        thinkingConfig = ThinkingConfig(thinkingLevel = "HIGH")
                     )
                 )
 
@@ -57,6 +57,9 @@ class TrustLayerViewModel : ViewModel() {
                 
                 val text = response.candidates.firstOrNull()?.content?.parts?.firstOrNull()?.text
                 trustScoreAnalysis = text ?: "Evaluation failed. No answer."
+            } catch (e: retrofit2.HttpException) {
+                val errorBody = e.response()?.errorBody()?.string()
+                trustScoreAnalysis = "Evaluation error: ${e.code()} - $errorBody"
             } catch (e: Exception) {
                 trustScoreAnalysis = "Error navigating incident: ${e.message}"
             } finally {
